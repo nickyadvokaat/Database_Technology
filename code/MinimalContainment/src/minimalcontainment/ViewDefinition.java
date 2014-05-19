@@ -22,7 +22,7 @@ public class ViewDefinition {
         this.edges = edges;
     }
     
-    public Set<Edge> getViewMatch(PatternQuery Vi){
+    public Set<Edge> getViewMatch(ViewDefinition Vi){
         Set<Edge> result = new HashSet<>();
         for(Edge e1 : this.edges){
             for(Edge e2 : Vi.edges){

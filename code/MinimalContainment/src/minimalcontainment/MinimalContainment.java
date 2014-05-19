@@ -16,21 +16,36 @@ import java.util.Set;
  */
 public class MinimalContainment {
 
-    public static void run(PatternQuery Qs, Set<ViewDefinition> V) {
-        Set<ViewDefinition> Va = new HashSet<ViewDefinition>();
-        Set<Edge> E;
-        HashMap M;
+    public static Set<ViewDefinition> run(ViewDefinition Qs, Set<ViewDefinition> V) {
+        Set<ViewDefinition> Va = new HashSet<>();
+        Set<Set<Edge>> S = new HashSet<>();
+        Set<Edge> E = new HashSet<>();
+        HashMap<Edge,Set<ViewDefinition>> M = new HashMap<>();
         for(ViewDefinition Vi : Va){
-            Set<Edge> MsQVi = Qs.getViewMatch(Vi);
+            Set<Edge> MQsVi = Qs.getViewMatch(Vi);
+            Set<Edge> MQsViCopy = new HashSet<>(MQsVi);
+            MQsViCopy.removeAll(E);
+            if(!MQsViCopy.isEmpty()){
+                Va.add(Vi);
+                S.add(MQsVi);
+                E.addAll(MQsVi);
+                for(Edge e : MQsVi){
+                    Set<ViewDefinition> Me = M.get(e);
+                    Me.add(Vi);
+                    M.put(e, Me);
+                }
+            }
         }
         if(){
-            
+            return null;
         }
-        for(){
-            
+        for(Set<Edge> MQsVj : S){
+            for(Edge e : MQsVj){
+                Set<ViewDefinition> Me = M.get(e);
+                
+            }
         }
-        
-        // print resultViewDefinitions;
+        return Va;
     }
     
     /**
@@ -40,7 +55,7 @@ public class MinimalContainment {
         // TODO code application logic here
         Set<ViewDefinition> viewDefinitions = new HashSet<ViewDefinition>();
         viewDefinitions.add(null);
-        PatternQuery patternQuery = new PatternQuery();
+        ViewDefinition patternQuery = new ViewDefinition(null,null);
         run(patternQuery,viewDefinitions);
     }
     
