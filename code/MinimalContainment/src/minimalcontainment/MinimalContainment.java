@@ -18,31 +18,46 @@ public class MinimalContainment {
 
     public static Set<ViewDefinition> run(ViewDefinition Qs, Set<ViewDefinition> V) {
         Set<ViewDefinition> Va = new HashSet<>();
-        Set<Set<Edge>> S = new HashSet<>();
+        Set<ViewMatch> S = new HashSet<>();
         Set<Edge> E = new HashSet<>();
         HashMap<Edge,Set<ViewDefinition>> M = new HashMap<>();
+        
+        Set<Edge> Ep = new HashSet<>();
         for(ViewDefinition Vi : Va){
-            Set<Edge> MQsVi = Qs.getViewMatch(Vi);
-            Set<Edge> MQsViCopy = new HashSet<>(MQsVi);
-            MQsViCopy.removeAll(E);
-            if(!MQsViCopy.isEmpty()){
+            Ep.addAll(Qs.getViewMatch(Vi));
+        }
+        
+        for(ViewDefinition Vi : Va){
+            ViewMatch MQsVi = new ViewMatch(Qs, Vi, Qs.getViewMatch(Vi));
+            ViewMatch MQsViCopy = MQsVi.getCopy();
+            MQsViCopy.edges.removeAll(E);
+            if(!MQsViCopy.edges.isEmpty()){
                 Va.add(Vi);
                 S.add(MQsVi);
-                E.addAll(MQsVi);
-                for(Edge e : MQsVi){
+                E.addAll(MQsVi.edges);
+                for(Edge e : MQsVi.edges){
                     Set<ViewDefinition> Me = M.get(e);
                     Me.add(Vi);
                     M.put(e, Me);
                 }
             }
         }
-        if(){
+        if(!E.equals(Ep)){
             return null;
         }
-        for(Set<Edge> MQsVj : S){
-            for(Edge e : MQsVj){
+        for(ViewMatch MQsVj : S){
+            boolean b = false;
+            for(Edge e : MQsVj.edges){
                 Set<ViewDefinition> Me = M.get(e);
                 
+                if(){
+                    b = true;
+                    break;
+                }
+            }
+            if(!b){
+                Va.remove(MQsVj.Vi);
+                // update M
             }
         }
         return Va;
