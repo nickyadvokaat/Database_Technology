@@ -12,10 +12,10 @@ package minimalcontainment;
  */
 public class Edge {
     
-    public Vertex from;
-    public Vertex to;
+    public String from;
+    public String to;
     
-    public Edge(Vertex from, Vertex to){
+    public Edge(String from, String to){
         this.from = from;
         this.to = to;
     }

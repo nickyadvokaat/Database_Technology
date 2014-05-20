@@ -13,6 +13,7 @@ import java.util.Set;
  * @author nickyadvokaat
  */
 public class ViewMatch {
+    
     public ViewDefinition Qs;
     public ViewDefinition Vi;
     public Set<Edge> edges;

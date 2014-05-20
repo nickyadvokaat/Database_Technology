@@ -16,6 +16,13 @@ import java.util.Set;
  */
 public class MinimalContainment {
 
+    /**
+     * Minimal Containment Algorithm
+     * 
+     * @param Qs    A pattern query
+     * @param V     A set of view definitions
+     * @return      A subset Va of V that minimally contains Qs
+     */
     public static Set<ViewDefinition> run(ViewDefinition Qs, Set<ViewDefinition> V) {
         Set<ViewDefinition> Va = new HashSet<>();
         Set<ViewMatch> S = new HashSet<>();
@@ -27,7 +34,7 @@ public class MinimalContainment {
             Ep.addAll(Qs.getViewMatch(Vi));
         }
         
-        for(ViewDefinition Vi : Va){
+        for(ViewDefinition Vi : V){
             ViewMatch MQsVi = new ViewMatch(Qs, Vi, Qs.getViewMatch(Vi));
             ViewMatch MQsViCopy = MQsVi.getCopy();
             MQsViCopy.edges.removeAll(E);
@@ -49,15 +56,15 @@ public class MinimalContainment {
             boolean b = false;
             for(Edge e : MQsVj.edges){
                 Set<ViewDefinition> Me = M.get(e);
-                
-                if(){
+                Me.remove(MQsVj.Vi);
+                if(Me.isEmpty()){
                     b = true;
                     break;
                 }
             }
             if(!b){
                 Va.remove(MQsVj.Vi);
-                // update M
+                // update M ??what is meant by this
             }
         }
         return Va;
@@ -69,8 +76,22 @@ public class MinimalContainment {
     public static void main(String[] args) {
         // TODO code application logic here
         Set<ViewDefinition> viewDefinitions = new HashSet<ViewDefinition>();
-        viewDefinitions.add(null);
-        ViewDefinition patternQuery = new ViewDefinition(null,null);
+        
+        Edge e1 = new Edge("V>=10K","C=Music");
+        ViewDefinition v1 = new ViewDefinition();
+        v1.addEdge(e1);
+        
+        Edge e2 = new Edge("C=Music","V>=10k");
+        Edge e3 = new Edge("C=Music","R>=4");
+        ViewDefinition v2 = new ViewDefinition();
+        v2.addEdge(e2);
+        v2.addEdge(e3);
+        
+        viewDefinitions.add(v1);
+        viewDefinitions.add(v2);
+        
+        ViewDefinition patternQuery = new ViewDefinition();
+        
         run(patternQuery,viewDefinitions);
     }
     

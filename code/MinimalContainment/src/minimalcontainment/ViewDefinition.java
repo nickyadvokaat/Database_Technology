@@ -14,12 +14,19 @@ import java.util.Set;
  * @author nickyadvokaat
  */
 public class ViewDefinition {
-    public Set<Vertex> vertices;
+    
     public Set<Edge> edges;
     
-    public ViewDefinition(Set<Vertex> vertices, Set<Edge> edges){
-        this.vertices = vertices;
+    public ViewDefinition(){
+        this.edges = new HashSet<>();
+    }
+    
+    public ViewDefinition(Set<Edge> edges){
         this.edges = edges;
+    }
+    
+    public void addEdge(Edge e){
+        this.edges.add(e);
     }
     
     public Set<Edge> getViewMatch(ViewDefinition Vi){
@@ -35,7 +42,7 @@ public class ViewDefinition {
     }
     
     private static boolean edgeEqual(Edge e1, Edge e2){
-        return e1.from.name.equals(e2.from.name) &&
-                e1.to.name.equals(e2.to.name);
+        return e1.from.equals(e2.from) &&
+                e1.to.equals(e2.to);
     }
 }
