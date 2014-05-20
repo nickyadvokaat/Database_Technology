@@ -93,6 +93,7 @@ public class MinimalContainment {
         ViewDefinition patternQuery = new ViewDefinition();
         
         run(patternQuery,viewDefinitions);
+	/*test*/
     }
     
 }
