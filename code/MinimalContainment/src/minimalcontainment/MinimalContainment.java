@@ -99,7 +99,6 @@ public class MinimalContainment {
         
         Set<ViewDefinition> result = run(patternQuery,viewDefinitions);
         
-<<<<<<< HEAD
         if(result == null){
             System.out.println("Result was null");
         }else{
@@ -111,10 +110,7 @@ public class MinimalContainment {
                }
             }
         }
-=======
         run(patternQuery,viewDefinitions);
-	/*test*/
->>>>>>> FETCH_HEAD
     }
     
 }
