@@ -1,3 +1,10 @@
 for P1: 
 for P2:
 for P3: SELECT ID, category, views, rate FROM `video` WHERE category = 'music' AND views >= 10000 AND rate >= 4
+it should be something like
+SELECT	v1.ID
+FROM    video as v1, video as v2, related
+WHERE   related.a = v1.id AND 
+	related.b = v2.id AND 
+	v1.category = ‘music’ AND
+	v2.view >= 10000
