@@ -110,7 +110,5 @@ public class MinimalContainment {
                }
             }
         }
-        run(patternQuery,viewDefinitions);
-    }
-    
+    }    
 }
