@@ -30,7 +30,7 @@ public class MinimalContainment {
         HashMap<Edge,Set<ViewDefinition>> M = new HashMap<>();
         
         Set<Edge> Ep = new HashSet<>();
-        for(ViewDefinition Vi : Va){
+        for(ViewDefinition Vi : V){
             Ep.addAll(Qs.getViewMatch(Vi));
         }
         
@@ -44,6 +44,9 @@ public class MinimalContainment {
                 E.addAll(MQsVi.edges);
                 for(Edge e : MQsVi.edges){
                     Set<ViewDefinition> Me = M.get(e);
+                    if(Me == null){
+                        Me = new HashSet<>();
+                    }
                     Me.add(Vi);
                     M.put(e, Me);
                 }
@@ -91,8 +94,22 @@ public class MinimalContainment {
         viewDefinitions.add(v2);
         
         ViewDefinition patternQuery = new ViewDefinition();
+        Edge e0 = new Edge("V>=10K","C=Music");
+        patternQuery.addEdge(e0);
         
-        run(patternQuery,viewDefinitions);
+        Set<ViewDefinition> result = run(patternQuery,viewDefinitions);
+        
+        if(result == null){
+            System.out.println("Result was null");
+        }else{
+            int i = 0;
+            for(ViewDefinition V : result){
+               System.out.println("View " + i++);
+               for(Edge e : V.edges){
+                   System.out.println("( " + e.from + " , " + e.to + " )");
+               }
+            }
+        }
     }
     
 }
