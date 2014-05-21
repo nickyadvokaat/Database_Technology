@@ -1,3 +1,23 @@
 for P1: 
+
+select * 
+from video v1 
+where v1.id in (
+   select r.a 
+   from related r 
+   join video v2 on r.b = v2.id 
+   where v2.views >= 10000 )
+and v1.category = 'music'
+
 for P2:
-for P3: SELECT ID, category, views, rate FROM `video` WHERE category = 'music' AND views >= 10000 AND rate >= 4
+
+select * 
+from video v1 
+where v1.id in (
+   select r.a 
+   from related r 
+   join video v2 on r.b = v2.id 
+   where v2.rate >= 10000 )
+and v1.category = 'Sports'
+
+for P3: 
