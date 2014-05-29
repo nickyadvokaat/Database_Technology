@@ -10,6 +10,7 @@ where v1.id in (
 and v1.category = 'music'
 
 for P2:
+<<<<<<< HEAD
 
 select * 
 from video v1 
@@ -21,3 +22,13 @@ where v1.id in (
 and v1.category = 'Sports'
 
 for P3: 
+=======
+for P3: SELECT ID, category, views, rate FROM `video` WHERE category = 'music' AND views >= 10000 AND rate >= 4
+it should be something like
+SELECT	v1.ID
+FROM    video as v1, video as v2, related
+WHERE   related.a = v1.id AND 
+	related.b = v2.id AND 
+	v1.category = ‘music’ AND
+	v2.view >= 10000
+>>>>>>> ac9d96536f3b78a9c1ed6c2c86ae46b02e794e37
