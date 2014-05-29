@@ -108,3 +108,4 @@ nb-configuration.xml
 *.war
 *.ear
 >>>>>>> FETCH_HEAD
+view queries.txt
