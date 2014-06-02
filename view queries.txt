@@ -1,31 +1,156 @@
-﻿for P1: 
+P1.
 
-select * 
-from video v1 
-where v1.id in (
-   select r.a 
-   from related r 
-   join video v2 on r.b = v2.id 
-   where v2.views >= 10000 )
-and v1.category = 'music'
+SELECT 	v1.ID AS 'V>="10K"', v2.ID AS 'C="Music"'
+FROM 	video AS v1, video AS v2, related
+WHERE 	related.a = v1.ID AND
+	related.b = v2.ID AND
+	v1.views >= 10000 AND
+	v2.category = 'Music'
+P2.
 
-for P2:
+SELECT 	v1.ID AS ‘R>=“5”’, v2.ID AS ‘C=“Sports”’
+FROM 	video AS v1, video AS v2, related
+WHERE 	related.a = v1.ID AND
+	related.b = v2.ID AND 
+	v1.rate >= 5 AND
+	v2.category = ’Sports’
 
-select * 
-from video v1 
-where v1.id in (
-   select r.a 
-   from related r 
-   join video v2 on r.b = v2.id 
-   where v2.rate >= 10000 )
-and v1.category = 'Sports'
+P3.
 
-for P3: SELECT ID, category, views, rate FROM `video` WHERE category = 'music' AND views >= 10000 AND rate >= 4
-it should be something like
-SELECT	v1.ID
-FROM    video as v1, video as v2, related
-WHERE   related.a = v1.id AND 
-	related.b = v2.id AND 
-	v1.category = ‘music’ AND
-	v2.view >= 10000
+SELECT 	v1.ID AS ‘Category=“Music”’, v2.ID AS ‘V>=“10K”’, v3.ID AS ‘R>=“4”’
+FROM 	video AS v1, video AS v2, video AS v3, related AS r1, related AS r2
+WHERE 	r1.a = v1.ID AND
+	r1.b = v2.ID AND 
+	r2.a = v1.ID AND
+	r2.b = v3.ID AND
+	v1.category = ’Music’ AND
+	v2.views >= 10000 AND
+	v3.rate >= 4
 
+P4.
+
+SELECT 	v1.ID AS ‘A<=“100”’, v2.ID AS ‘C=“Sports”’, v3.ID AS ‘R>=“5”’
+FROM 	video AS v1, video AS v2, video AS v3, related AS r1, related AS r2
+WHERE 	r1.a = v1.ID AND
+	r1.b = v2.ID AND 
+	r2.a = v2.ID AND
+	r2.b = v3.ID AND
+	v1.age <= 100 AND
+	v2.category = ‘Sports’ AND
+	v3.rate >= 5
+
+P5.
+
+SELECT 	v1.ID AS ‘R>=“4”’, v2.ID AS ‘L<=“200”’, v3.ID AS ‘C>=“Sports”’
+FROM 	video AS v1, video AS v2, video AS v3, related AS r1, related AS r2
+WHERE 	r1.a = v1.ID AND
+	r1.b = v3.ID AND 
+	r2.a = v2.ID AND
+	r2.b = v3.ID AND
+	v1.rate >= 4 AND
+	v2.length >= 200 AND
+	v3.category = ‘Sports’
+
+P6.
+
+SELECT 	v1.ID AS ‘Rate>=“5”’, v2.ID AS ‘V>=“10K”’, v3.ID AS ‘C>=“Ent.”’
+FROM 	video AS v1, video AS v2, video AS v3, related AS r1, related AS r2, related AS r3
+WHERE 	r1.a = v1.ID AND
+	r1.b = v2.ID AND 
+	r2.a = v2.ID AND
+	r2.b = v3.ID AND
+	r3.a = v1.ID AND
+	r3.b = v3.ID AND
+	v1.rate >= 5 AND
+	v2.views >= 10000 AND
+	v3.category = ‘Entertainment’
+
+P7.
+
+SELECT 	v1.ID AS ‘C=“Music”’, v2.ID AS ‘A>=“100”’, v3.ID AS ‘C=“Comedy”’, v4.ID AS ‘V>=“10000”’
+FROM 	video AS v1, video AS v2, video AS v3, video AS v4, related AS r1, related AS r2, related AS r3
+WHERE 	r1.a = v1.ID AND
+	r1.b = v2.ID AND 
+	r2.a = v1.ID AND
+	r2.b = v3.ID AND
+	r3.a = v3.ID AND
+	r3.b = v4.ID AND
+	v1.category = ‘Music’ AND
+	v2.age >= 100 AND
+	v3.category = ‘Comedy’ AND
+	v4.views >= 10000
+
+P8.
+
+SELECT 	v1.ID AS ‘C=“News”’, v2.ID AS ‘A>=“100”’, v3.ID AS ‘R>=“4”’, v4.ID AS ‘V>=“10K”’
+FROM 	video AS v1, video AS v2, video AS v3, video AS v4, related AS r1, related AS r2, related AS r3
+WHERE 	r1.a = v1.ID AND
+	r1.b = v2.ID AND 
+	r2.a = v1.ID AND
+	r2.b = v3.ID AND
+	r3.a = v1.ID AND
+	r3.b = v4.ID AND
+	v1.category = ‘News’ AND
+	v2.age >= 100 AND
+	v3.rate >= 4 AND
+	v4.views >= 10000
+
+P9.
+
+SELECT 	v1.ID AS ‘V>=“10K”’, v2.ID AS ‘C=“Ent.”’, v3.ID AS ‘L>=“200”’, v4.ID AS ‘R>=“4”’
+FROM 	video AS v1, video AS v2, video AS v3, video AS v4, related AS r1, related AS r2, related AS r3
+WHERE 	r1.a = v1.ID AND
+	r1.b = v2.ID AND 
+	r2.a = v2.ID AND
+	r2.b = v3.ID AND
+	r3.a = v2.ID AND
+	r3.b = v4.ID AND
+	v1.views >= 10000 AND
+	v2.category = ‘Entertainment’ AND
+	v3.length >= 200 AND
+	v4.rate >= 4
+
+P10.
+
+SELECT 	v1.ID AS ‘A>=“200”’, v2.ID AS ‘R>=“5”’, v3.ID AS ‘L>=“200”’, v4.ID AS ‘C=“Comedy”’
+FROM 	video AS v1, video AS v2, video AS v3, video AS v4, related AS r1, related AS r2, related AS r3
+WHERE 	r1.a = v1.ID AND
+	r1.b = v3.ID AND 
+	r2.a = v1.ID AND
+	r2.b = v4.ID AND
+	r3.a = v2.ID AND
+	r3.b = v4.ID AND
+	v1.age >= 200 AND
+	v2.rate >= 5 AND
+	v3.length >= 200 AND
+	v4.category = ‘Comedy’
+
+P11.
+
+SELECT 	v1.ID AS ‘R>=“5”’, v2.ID AS ‘V>=“10K”’, v3.ID AS ‘C=“Sports”’, v4.ID AS ‘C=“Sports”’
+FROM 	video AS v1, video AS v2, video AS v3, video AS v4, related AS r1, related AS r2, related AS r3
+WHERE 	r1.a = v1.ID AND
+	r1.b = v2.ID AND 
+	r2.a = v2.ID AND
+	r2.b = v3.ID AND
+	r3.a = v3.ID AND
+	r3.b = v4.ID AND
+	v1.rate >= 5 AND
+	v2.views >= 10000 AND
+	v3.category = ’Sports’ AND
+	v4.category = ’Sports’
+
+P12.
+
+SELECT 	v1.ID AS ‘C=“Ent.”’, v2.ID AS ‘V>=“10K”’, v3.ID AS ‘R>=“4”’, v4.ID AS ‘C=“Music”’
+FROM 	video AS v1, video AS v2, video AS v3, video AS v4, related AS r1, related AS r2, related AS r3
+WHERE 	r1.a = v1.ID AND
+	r1.b = v3.ID AND 
+	r2.a = v3.ID AND
+	r2.b = v4.ID AND
+	r3.a = v4.ID AND
+	r3.b = v2.ID AND
+	v1.category = ‘Entertainment’ AND
+	v2.views >= 10000 AND
+	v3.rate >= 4 AND
+	v4.category = Music
