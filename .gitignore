@@ -109,3 +109,4 @@ nb-configuration.xml
 *.ear
 >>>>>>> FETCH_HEAD
 view queries.txt
+/code/DBT/nbproject/private/
